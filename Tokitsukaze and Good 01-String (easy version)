@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--){
+       int n;
+       cin>>n;
+       string s;
+       cin>>s;
+       int cnt=0;
+       int i=0;
+       while(i<=n-2){
+               if(s.substr(i,2)=="10" || s.substr(i,2)=="01"){
+                   i+=2;
+                   cnt++;
+               }
+               else{
+                   i+=2;
+                   cnt+=0;
+               }
+           }
+           cout<<cnt<<endl;
+       }
+}
+           
