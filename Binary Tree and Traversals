@@ -1,0 +1,110 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+void printCurrentLevel(struct Node* root, int level)
+{
+    if (root == NULL)
+        return;
+    if (level == 1)
+        {
+            printf("%d ", root->data);
+        }
+    else if (level > 1) {
+        printCurrentLevel(root->left, level - 1);
+        printCurrentLevel(root->right, level - 1);
+    }
+}
+
+void printLevelOrder(struct Node* root)
+{
+    int h;
+    h=height(root);
+    int i;
+    for (i = 1; i <= h; i++)
+        printCurrentLevel(root, i);
+        
+}
+
+int height(struct Node* root)
+{
+    if (root == NULL)
+        return 0;
+    else {
+        int lheight = height(root->left);
+        int rheight = height(root->right);
+ 
+        if (lheight > rheight)
+            return (lheight + 1);
+        else
+            return (rheight + 1);
+    }
+}
+
+struct Node* NewNode(int data){
+    struct Node* n;
+    n=(struct Node*)malloc(sizeof(struct Node));
+    n->data=data;
+    n->left=NULL;
+    n->right=NULL;
+    return n;
+}
+
+void Preorder(struct Node* root){
+    if(root!=NULL){
+        printf("%d",root->data);
+        printf(" ");
+        Preorder(root->left);
+        Preorder(root->right);
+    }
+}
+
+void Postorder(struct Node* root){
+    if(root!=NULL){
+        Postorder(root->left);
+        Postorder(root->right);
+        printf("%d",root->data);
+        printf(" ");
+    }
+}
+
+void InOrder(struct Node* root){
+    if(root!=NULL){
+        InOrder(root->left);
+        printf("%d",root->data);
+        printf(" ");
+        InOrder(root->right);
+    }
+}
+int main()
+{
+    struct Node* p=NewNode(4);
+    struct Node* p1=NewNode(1);
+    struct Node* p2=NewNode(6);
+    struct Node* p3=NewNode(5);
+    struct Node* p4=NewNode(2);
+     p->left=p1;
+     p->right=p2;
+     p1->left=p3;
+     p1->right=p4;
+     //Preorder(p);
+    //  Postorder(p);
+   // InOrder(p);
+    
+    printf("Level Order traversal of binary tree is \n");
+    printLevelOrder(p);
+    return 0;
+}
